@@ -51,7 +51,19 @@ class TreeTime(ClockTree):
         super(TreeTime, self).__init__(*args, **kwargs)
 
 
-    def run(self, root=None, infer_gtr=True, relaxed_clock=None, n_iqd = None,
+    def run(self, **kwargs):
+        import sys
+        try:
+            self._run(**kwargs)
+        except TreeTimeError as err:
+            print(f"ERROR:\n\n{err}", file=sys.stderr)
+            raise err
+        except BaseException as err:
+            print(f"ERROR:\n\n{err}", file=sys.stderr)
+            raise TreeTimeError() from err
+
+
+    def _run(self, root=None, infer_gtr=True, relaxed_clock=None, n_iqd = None,
             resolve_polytomies=True, max_iter=0, Tc=None, fixed_clock_rate=None,
             time_marginal='never', sequence_marginal=False, branch_length_mode='auto',
             vary_rate=False, use_covariation=False, tracelog_file=None,
