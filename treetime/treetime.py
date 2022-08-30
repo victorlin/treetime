@@ -60,6 +60,10 @@ class TreeTime(ClockTree):
             raise err
         except BaseException as err:
             print(f"ERROR:\n\n{err}", file=sys.stderr)
+            print("If this error persists, please let us know by filing an issue at: https://github.com/neherlab/treetime/issues", file=sys.stderr)
+            # This isn't ideal since the issue link gets printed before the
+            # traceback, but there's no way to print it afterwards without
+            # actually handling the exception.
             raise TreeTimeError() from err
 
 
