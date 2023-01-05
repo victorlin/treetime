@@ -259,7 +259,7 @@ class Coalescent(object):
             self.set_Tc(Tc)
             return -self.total_LH()
 
-        sol = minimize_scalar(cost, bounds=[ttconf.TINY_NUMBER,10.0])
+        sol = minimize_scalar(cost, method='brent')
         if "success" in sol and sol["success"]:
             self.set_Tc(sol['x'])
         else:

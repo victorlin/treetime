@@ -1031,7 +1031,7 @@ class ClockTree(TreeAnc):
                     return (thres - np.diff(node.marginal_cdf(np.array(interval))))**2
 
                 # minimza and determine success
-                sol = minimize(func, bracket=[0,10], args=(fraction,))
+                sol = minimize(func, bracket=[0,10], args=(fraction,), method='brent')
                 if sol['success']:
                     mutation_contribution = self.date2dist.to_numdate(np.array([right(sol['x']), left(sol['x'])]).squeeze())
                 else: # on failure, return standard confidence interval

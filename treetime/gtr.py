@@ -803,7 +803,7 @@ class GTR(object):
         try:
             from scipy.optimize import minimize_scalar
             opt = minimize_scalar(_neg_prob,
-                    bounds=[-np.sqrt(ttconf.MAX_BRANCH_LENGTH),np.sqrt(ttconf.MAX_BRANCH_LENGTH)],
+                    method='brent',
                     args=(seq_pair, multiplicity), tol=tol)
             new_len = opt["x"]**2
             if 'success' not in opt:
